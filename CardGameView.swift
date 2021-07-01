@@ -7,6 +7,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var playerCard = "card5"
+    @State private var cpuCard = "card9"
+    @State private var playerScore = 0
+    @State private var cpuScore = 0
+    
+    
     var body: some View {
         
         ZStack{
@@ -19,14 +26,29 @@ struct ContentView: View {
                 Spacer()
                 HStack{
                     Spacer()
-                    Image("card2")
+                    Image(playerCard)
                     Spacer()
-                    Image("card3")
+                    Image(cpuCard)
                     Spacer()
                 }
                 Spacer()
                 
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                Button(action: {
+                    
+                    // Generate a random number
+                    let playerRand = Int.random(in:2...14)
+                    let cpuRand = Int.random(in:2...14)
+                    
+                    // Update Card value
+                    playerCard = "card"+String(playerRand)
+                    cpuCard = "card"+String(cpuRand)
+                    
+                    // Update Score
+                    playerScore += 1
+                    cpuScore += 1
+                    
+                    
+                }, label: {
                     Image("dealbutton")
                 })
                 
@@ -35,12 +57,12 @@ struct ContentView: View {
                     Spacer()
                     VStack{
                         Text("Player").font(.headline).foregroundColor(.white)
-                        Text("0").foregroundColor(.white)
+                        Text(String(playerScore)).foregroundColor(.white)
                     }
                     Spacer()
                     VStack{
                         Text("CPU").font(.headline).foregroundColor(.white)
-                        Text("0").foregroundColor(.white)
+                        Text(String(cpuScore)).foregroundColor(.white)
                     }
                     Spacer()
                 }
